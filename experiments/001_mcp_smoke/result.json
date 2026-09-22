@@ -1,0 +1,221 @@
+{
+  "experiment": "CODEX_BLENDER_MCP_V0_1",
+  "date": "2026-09-22",
+  "mac_arch": "arm64",
+  "macos": "26.6.2",
+  "codex_cli": "0.155.0-alpha.9.2",
+  "official_mcp_version": "1.0.3",
+  "official_revision": "2cea8d566dde07fbac28a61d698909d69724e853",
+  "configuration": "project .codex/config.toml; isolated .local/blender-user profile",
+  "user_config_handling": "No user-config write operation issued; existing MCP entries preserved. Hash changed during the task, so byte-for-byte immutability is not claimed.",
+  "live_mcp_tool_count": 26,
+  "initial_scene": {
+    "version": "5.2.2 LTS",
+    "background": false,
+    "scene": "Scene",
+    "objects": [
+      {
+        "name": "Cube",
+        "type": "MESH"
+      },
+      {
+        "name": "Light",
+        "type": "LIGHT"
+      },
+      {
+        "name": "Camera",
+        "type": "CAMERA"
+      }
+    ],
+    "addon_enabled": true
+  },
+  "live_scene": {
+    "status": "PASS",
+    "blender_version": "5.2.2 LTS",
+    "background": false,
+    "scene": "MCP_SMOKE_SCENE_V0_1",
+    "objects": [
+      {
+        "name": "Product_Label",
+        "type": "FONT"
+      },
+      {
+        "name": "Camera_Product",
+        "type": "CAMERA"
+      },
+      {
+        "name": "Key_Light",
+        "type": "LIGHT"
+      },
+      {
+        "name": "Fill_Light",
+        "type": "LIGHT"
+      },
+      {
+        "name": "Rim_Light",
+        "type": "LIGHT"
+      },
+      {
+        "name": "Product_Body",
+        "type": "MESH"
+      },
+      {
+        "name": "Front_Panel",
+        "type": "MESH"
+      },
+      {
+        "name": "Gold_Top_Inlay",
+        "type": "MESH"
+      },
+      {
+        "name": "Gold_Dial",
+        "type": "MESH"
+      },
+      {
+        "name": "Dial_Indicator",
+        "type": "MESH"
+      },
+      {
+        "name": "Vent_00",
+        "type": "MESH"
+      },
+      {
+        "name": "Vent_01",
+        "type": "MESH"
+      },
+      {
+        "name": "Vent_02",
+        "type": "MESH"
+      },
+      {
+        "name": "Vent_03",
+        "type": "MESH"
+      },
+      {
+        "name": "Vent_04",
+        "type": "MESH"
+      },
+      {
+        "name": "Pedestal",
+        "type": "MESH"
+      },
+      {
+        "name": "Pedestal_Gold_Trim",
+        "type": "MESH"
+      },
+      {
+        "name": "Ground",
+        "type": "MESH"
+      }
+    ],
+    "camera": "Camera_Product",
+    "camera_bounds": {
+      "Product_Body": {
+        "x": [
+          0.3521,
+          0.6479
+        ],
+        "y": [
+          0.2619,
+          0.8704
+        ]
+      },
+      "Pedestal": {
+        "x": [
+          0.194,
+          0.806
+        ],
+        "y": [
+          0.0493,
+          0.5607
+        ]
+      },
+      "Gold_Dial": {
+        "x": [
+          0.4075,
+          0.4895
+        ],
+        "y": [
+          0.451,
+          0.6365
+        ]
+      }
+    },
+    "lights": [
+      {
+        "name": "Key_Light",
+        "energy": 1150.0
+      },
+      {
+        "name": "Fill_Light",
+        "energy": 800.0
+      },
+      {
+        "name": "Rim_Light",
+        "energy": 1700.0
+      }
+    ],
+    "materials": [
+      "Anodized_Teal",
+      "Champagne_Gold",
+      "Graphite_Panel",
+      "Midnight_Floor",
+      "Porcelain_Pedestal"
+    ],
+    "render": {
+      "engine": "CYCLES",
+      "samples": 64,
+      "device": "CPU",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "stored_path": "//../../renders/mcp_smoke_v0_1.png"
+    },
+    "blend_file": "blender/scenes/mcp_smoke_v0_1.blend",
+    "render_file": "renders/mcp_smoke_v0_1.png"
+  },
+  "saved_blend_reopened": "PASS",
+  "png_validation": {
+    "format": "PNG",
+    "size": [
+      1920,
+      1080
+    ],
+    "rgb_stddev": [
+      48.0796,
+      48.5213,
+      47.7676
+    ]
+  },
+  "visual_check": {
+    "status": "PASS",
+    "checks": [
+      "960x540 preview opened and inspected",
+      "1920x1080 final opened and inspected",
+      "subject and pedestal fully visible",
+      "teal metal and gold dial visibly distinct",
+      "soft shadows and rim highlights visible",
+      "official MCP Blender window screenshot opened and inspected"
+    ]
+  },
+  "artifacts": {
+    "blender/scenes/mcp_smoke_v0_1.blend": {
+      "bytes": 164240,
+      "sha256": "726b80d205bfe9bd2fcaf176cc013ce02c6e5123a45a06cac64986b9a921cc9f"
+    },
+    "renders/mcp_smoke_v0_1.png": {
+      "bytes": 1782948,
+      "sha256": "fb0bc6600ac86a01b2251b6e793c8bd34debda8dc9972bb715e5b57a52bef13c"
+    }
+  },
+  "manual_steps_required": 0,
+  "known_limitations": [
+    "Cycles CPU selected after first Metal kernel initialization stalled",
+    "Codex App Server MCP tool/call API is experimental",
+    "Desktop task native tool catalog was not dynamically updated; live control uses Codex App Server MCP client",
+    "Generated binary artifacts are local-only; not uploaded"
+  ],
+  "render_route": "execute_blender_code -> bpy.ops.render.render(write_still=True)",
+  "transport": "Codex App Server -> MCP stdio -> official Blender Lab -> TCP -> Blender GUI bpy"
+}
