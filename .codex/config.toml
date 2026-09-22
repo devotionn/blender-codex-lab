@@ -1,5 +1,5 @@
 [mcp_servers.blender]
 command = "./scripts/blender-mcp"
 startup_timeout_sec = 30
-tool_timeout_sec = 300
+tool_timeout_sec = 1200
 enabled = true
