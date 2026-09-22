@@ -1,0 +1,169 @@
+{
+  "experiment": "BLENDER_PRODUCT_VIDEO_V0_1",
+  "date": "2026-09-22",
+  "status": "PASS",
+  "pr1": {
+    "status": "MERGED",
+    "merge_commit": "133c310d6510c350dcbee2e62f11c9b1f6a69983"
+  },
+  "environment": {
+    "mac_arch": "arm64",
+    "blender_version": "5.2.2 LTS",
+    "mcp_implementation": "Blender Lab MCP v1.0.3",
+    "mcp_connection": "PASS",
+    "live_mcp_tool_count": 26
+  },
+  "product": {
+    "name": "Premium Hotel Bath Towel",
+    "size_cm": [70, 140],
+    "weight_g": 600,
+    "color": "White",
+    "stack_count": 3
+  },
+  "scene": {
+    "name": "PRODUCT_TOWEL_V0_1",
+    "object_count": 19,
+    "towel_objects": [
+      "Towel_01_Body",
+      "Towel_02_Body",
+      "Towel_03_Body"
+    ],
+    "towel_material": "Towel_White_Fabric",
+    "cloth_features": [
+      "beveled and subdivided bodies",
+      "procedural displacement",
+      "raised front and back hems",
+      "separate folded top end",
+      "high-roughness sheen shader",
+      "procedural micro-fabric bump"
+    ],
+    "lights": [
+      "Key_Softbox",
+      "Fill_Softbox",
+      "Rim_Softbox",
+      "Top_Softbox"
+    ],
+    "studio": [
+      "Product_Pedestal",
+      "Pedestal_Brass_Trim",
+      "Studio_Cyclorama"
+    ],
+    "blend_reopen_validation": "PASS"
+  },
+  "camera": {
+    "name": "Camera_Product_Animated",
+    "movement": "camera dolly-in with subtle orbit; world and product stationary",
+    "interpolation": "BEZIER",
+    "samples": {
+      "start": {
+        "frame": 1,
+        "location": [6.2, -8.8, 4.8],
+        "lens_mm": 54
+      },
+      "middle": {
+        "frame": 84,
+        "location": [5.5, -7.8, 4.2],
+        "lens_mm": 58
+      },
+      "end": {
+        "frame": 168,
+        "location": [4.5, -7.1, 3.7],
+        "lens_mm": 60
+      }
+    },
+    "product_bounds_inside_frame": "PASS"
+  },
+  "render": {
+    "engine": "BLENDER_EEVEE",
+    "backend": "METAL",
+    "samples": 64,
+    "fps": 24,
+    "resolution": [1920, 1080],
+    "total_frames": 168,
+    "duration_seconds": 7.0,
+    "preview": {
+      "resolution": [960, 540],
+      "codec": "h264",
+      "frames": 168,
+      "duration_seconds": 7.0,
+      "render_seconds": 135.112,
+      "average_frame_seconds": 0.8042,
+      "status": "PASS"
+    },
+    "final": {
+      "resolution": [1920, 1080],
+      "codec": "h264",
+      "pixel_format": "yuv420p",
+      "frames": 168,
+      "duration_seconds": 7.0,
+      "render_seconds": 394.54,
+      "average_frame_seconds": 2.3485,
+      "status": "PASS"
+    }
+  },
+  "artifacts": {
+    "blender/scenes/product_towel_v0_1.blend": {
+      "bytes": 170202,
+      "sha256": "f4185fc00b20852d3c5e5f0d78d98a876cd8baec2aee483e83f63d35a746f200"
+    },
+    "renders/product_towel_v0_1_preview.mp4": {
+      "bytes": 275686,
+      "sha256": "28bd5ababa0aa504c3ad28169ab3ccdb903a5bfc1f584ca39f60fa9e03dfb729"
+    },
+    "renders/product_towel_v0_1.mp4": {
+      "bytes": 2502386,
+      "sha256": "b055829e3f5e0da9dccabca1bfc3fb0440a1e49a9c39bcfadcb9e3cc88ae2616"
+    }
+  },
+  "key_frames": {
+    "start": {
+      "frame": 1,
+      "path": ".local/product_towel_final_frames/frame_0001.png",
+      "sha256": "45dc8315a5ead3884b3d2a1083ebd739cf92ab95e68fb5f984718693bb440c7b"
+    },
+    "middle": {
+      "frame": 84,
+      "path": ".local/product_towel_final_frames/frame_0084.png",
+      "sha256": "293b32a4b7186cab8dc0f74352fe03d0d9f458f28835623edec9a9188374f00b"
+    },
+    "end": {
+      "frame": 168,
+      "path": ".local/product_towel_final_frames/frame_0168.png",
+      "sha256": "7c06d8bd07e0a3b31449d7792db2c093497aa11337caf9aea876c7c87f7ffccd"
+    }
+  },
+  "visual_inspection": {
+    "status": "PASS",
+    "iterations": 2,
+    "first_iteration_issue": "Opening frame exposed the cyclorama edge and towel highlights were too flat",
+    "correction": "Widened backdrop to 40 Blender units, reduced fabric base color and strengthened micro-bump",
+    "checks": [
+      "product remains entirely inside frame at start, middle and end",
+      "no clipping or interpenetration observed",
+      "white textile retains layer separation and soft edge detail",
+      "key, fill, rim and top softboxes produce soft commercial lighting",
+      "camera push-in and orbit are restrained and continuous",
+      "encoded preview and final key frames match the rendered sequence"
+    ],
+    "product_information_text": "omitted to preserve the minimal premium composition"
+  },
+  "pipeline": {
+    "parameterized_generator": "blender/scripts/render_product_video.py",
+    "one_command_entry": "scripts/run_product_video.py",
+    "config": "experiments/002_product_video/product.json",
+    "encoding": "complete PNG sequences encoded by scripts/encode_product_video.py",
+    "mcp_role": "interactive scene control, iteration, rendering and inspection",
+    "script_role": "deterministic reproducible generation"
+  },
+  "tests": {
+    "status": "PASS",
+    "count": 6,
+    "command": ".venv/bin/python -m unittest discover -s tests -v"
+  },
+  "known_limitations": [
+    "v0.1 generates folded towels only; other product types need dedicated geometry adapters",
+    "fabric uses procedural geometry and shading rather than cloth simulation or strand-level terry loops",
+    "final binary artifacts and frame sequences remain local and are Git-ignored",
+    "the Codex App Server MCP call surface used by the current desktop task is experimental"
+  ]
+}

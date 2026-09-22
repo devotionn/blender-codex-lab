@@ -99,6 +99,7 @@ async def main():
     parser.add_argument('action', choices=['inspect', 'execute', 'screenshot'])
     parser.add_argument('--file', type=Path)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--script-action', help='Optional action string exposed to the Blender script')
     args = parser.parse_args()
     if args.output and not args.output.resolve().is_relative_to(ROOT):
         parser.error('Output must stay inside this repository')
@@ -112,7 +113,10 @@ async def main():
             script = args.file.resolve()
             if not script.is_relative_to(ROOT):
                 parser.error('Only scripts inside this repository may be executed')
-            code = f'__file__ = {str(script)!r}\n' + script.read_text()
+            prefix = f'__file__ = {str(script)!r}\n'
+            if args.script_action:
+                prefix += f'PRODUCT_VIDEO_ACTION = {args.script_action!r}\n'
+            code = prefix + script.read_text()
             result = await client.call('execute_blender_code', {'code': code})
         else:
             result = await client.call('get_screenshot_of_window_as_image', {})

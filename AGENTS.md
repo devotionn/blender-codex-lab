@@ -9,4 +9,4 @@
 - Preserve existing Codex and Blender settings. This project uses its own Blender profile and `.codex/config.toml`.
 - Validate live datablocks, reopen the saved `.blend`, validate PNG pixels/dimensions, and visually inspect the output. An exit code alone is not a pass.
 - After rendering, run `.venv/bin/python -m unittest discover -s tests -v`. Keep verification evidence accurate; do not carry over a visual PASS after changing the render without inspecting it again.
-- Do not merge the integration PR.
+- Do not merge the current product-video PR.

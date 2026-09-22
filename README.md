@@ -1,8 +1,8 @@
 # Blender Codex Lab
 
-让 Codex 实际操作本机 Blender：创建一个青绿色金属桌面仪器，摆放到展示台上，用三点灯光和相机渲染。
+让 Codex 实际操作本机 Blender：从静态 MCP smoke test 走到参数化的 3D 产品广告短片。
 
-本项目使用 **Blender Lab 官方 MCP v1.0.3**。本次环境为 Apple Silicon / Blender 5.2.2 LTS。结果与验证见 [`experiments/001_mcp_smoke`](experiments/001_mcp_smoke)。完整 PNG 和可编辑 `.blend` 保留在本机。
+本项目使用 **Blender Lab 官方 MCP v1.0.3**。本次环境为 Apple Silicon / Blender 5.2.2 LTS。静态验证见 [`experiments/001_mcp_smoke`](experiments/001_mcp_smoke)，产品视频见 [`experiments/002_product_video`](experiments/002_product_video)。完整渲染和可编辑 `.blend` 保留在本机。
 
 ## 它如何工作
 
@@ -17,6 +17,38 @@ Scene → .blend → PNG Render
 ```
 
 Blender 是实际建模和渲染的软件。MCP 是让 Codex 向正在运行的 Blender 发出操作的连接。Python 脚本保存了可复用的建模步骤，下一次不必依赖完全相同的聊天措辞。
+
+## Product Video Pipeline
+
+```text
+Natural-language Brief
+        ↓
+      Codex
+        ↓
+   Blender MCP              interactive agent control
+        ↓
+Scene Iteration / Inspection
+        ↓
+Parameterized bpy Generator reproducible generation
+        ↓
+      Blender
+        ↓
+PNG Frames → H.264 MP4
+```
+
+MCP 负责实时读取、调整、渲染和检查当前 Blender 场景。生成器负责把已验证的方法固化为确定性代码。成功逻辑不只留在 prompt 中；产品参数、镜头时长和位置、分辨率、FPS 与输出路径都在 [`product.json`](experiments/002_product_video/product.json) 中。
+
+当前 v0.1 针对白色折叠浴巾：几何使用 bevel、subdivision、细微 displacement、独立织边和折叠层次；材质使用高 roughness、sheen 和程序化 fabric bump；相机本身执行平滑 dolly-in 与小幅 orbit。没有使用付费或外部模型资产，也没有 cloth simulation。
+
+Blender 启动并连接 MCP 后，完整可复现入口是：
+
+```sh
+.venv/bin/python scripts/run_product_video.py
+```
+
+该入口依次读取配置、通过 MCP 生成并保存场景、渲染检查帧、生成 preview、生成 final、编码并运行测试。只需要快速迭代时使用 `--preview-only`。底层 Blender 入口是 [`render_product_video.py`](blender/scripts/render_product_video.py)，支持 `build`、`checks`、`preview:first:last` 和 `final:first:last`，便于 Codex 针对一个镜头分段重做。
+
+最终版本为 1920×1080、24 fps、168 帧、7 秒。PNG 序列先落盘，再编码 MP4，因此编码失败不会丢掉已渲染帧。未来 Cutflow 边界见 [`docs/CUTFLOW_INTEGRATION.md`](docs/CUTFLOW_INTEGRATION.md)。
 
 ## 以后重新开机怎样开始
 
