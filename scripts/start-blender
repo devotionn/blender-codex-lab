@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+PROJECT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+BLENDER_EXECUTABLE=${BLENDER_EXECUTABLE:-/Applications/Blender.app/Contents/MacOS/Blender}
+export BLENDER_USER_RESOURCES="$PROJECT_ROOT/.local/blender-user"
+unset BLENDER_USER_CONFIG BLENDER_USER_SCRIPTS BLENDER_USER_EXTENSIONS BLENDER_USER_DATAFILES
+mkdir -p "$PROJECT_ROOT/.local/tmp"
+export TMPDIR="$PROJECT_ROOT/.local/tmp"
+exec "$BLENDER_EXECUTABLE" --online-mode "$@"

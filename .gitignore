@@ -1,0 +1,16 @@
+.DS_Store
+.local/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.log
+*.blend[0-9]
+*.blend@
+*.tmp
+renders/*
+!renders/.gitkeep
+blender/scenes/*
+!blender/scenes/.gitkeep
